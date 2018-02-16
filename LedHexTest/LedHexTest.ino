@@ -69,65 +69,65 @@ const unsigned int HDSPsegtab[16] = {
 };
 
 
-void setup (void)
+void setup(void)
 {
   // Set Arduino's pins to outputs
-  pinMode (LE_PIN, OUTPUT);
-  pinMode (SDA_PIN, OUTPUT);
-  pinMode (SCK_PIN, OUTPUT);
+  pinMode(LE_PIN, OUTPUT);
+  pinMode(SDA_PIN, OUTPUT);
+  pinMode(SCK_PIN, OUTPUT);
     
-  digitalWrite (LE_PIN, LOW);
-  digitalWrite (SCK_PIN, LOW);
+  digitalWrite(LE_PIN, LOW);
+  digitalWrite(SCK_PIN, LOW);
 }
 
 
-void loop (void)
+void loop(void)
 {
   int i, j;
   unsigned int segs;       // 16-bit unsigned binary
  
   for (i = 0; i < 16; i++) { 
     segs = HDSPsegtab[i];  // Pick up segment pattern from table
-    LedHex_send (segs);    // Send to display
-    delay (1000);          // Wait one second
+    LedHex_send(segs);     // Send to display
+    delay(1000);           // Wait one second
   }
 }
 
 
 /* LedHex_send --- send a 16-bit pattern to the LED driver chip */
 
-void LedHex_send (const unsigned int leds)
+void LedHex_send(const unsigned int leds)
 {
   // Straightforward implementation using digitalWrite(). Could be made
   // faster by using direct port I/O or SPI hardware.
   int i;
   
-  digitalWrite (LE_PIN, LOW);
-  digitalWrite (SCK_PIN, LOW);
+  digitalWrite(LE_PIN, LOW);
+  digitalWrite(SCK_PIN, LOW);
   
   // Send 16 bits, enough for both TLC5916 chips
   for (i = 0; i < 16; i++) {
     // Send one bit on SDA pin
     if (leds & (1u << i))
-      digitalWrite (SDA_PIN, HIGH);
+      digitalWrite(SDA_PIN, HIGH);
     else
-      digitalWrite (SDA_PIN, LOW);
+      digitalWrite(SDA_PIN, LOW);
     
-    delayMicroseconds (1);
+    delayMicroseconds(1);
     
-    // One microsecond pulse on SCK to clock the bit along
-    digitalWrite (SCK_PIN, HIGH);
+    // One microsecond HIGH pulse on SCK to clock the bit along
+    digitalWrite(SCK_PIN, HIGH);
     
-    delayMicroseconds (1);
+    delayMicroseconds(1);
     
-    digitalWrite (SCK_PIN, LOW);  
+    digitalWrite(SCK_PIN, LOW);
   }
   
-  // One microsecond pulse on LE to latch all 16 bits
-  digitalWrite (LE_PIN, HIGH);
+  // One microsecond HIGH pulse on LE to latch all 16 bits
+  digitalWrite(LE_PIN, HIGH);
   
-  delayMicroseconds (1);
+  delayMicroseconds(1);
     
-  digitalWrite (LE_PIN, LOW);
+  digitalWrite(LE_PIN, LOW);
 }
 
