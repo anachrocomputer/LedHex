@@ -5,6 +5,8 @@ and drive a display made from LEDs.
 
 The display was made as a small-volume low-cost PCB using a design drawn in KiCad.
 
+![LedHexDisplay](ledhexdisp1.jpg "Completed PCB populated with red LEDs")
+
 ## KiCadV3Pcb ##
 
 CAD files for the schematic and PCB,
@@ -42,6 +44,7 @@ Range is 0000-FFFF (0-65535).
 
 Test a four-digit chain of LedHex PCBs by lighting up all the segments
 in sequence.
+This is also a test of the LED power supply!
 
 ## LedHexTest ##
 
@@ -51,5 +54,5 @@ Simply count 0-9, A-F repeatedly on a single digit display.
 
 Test a four-digit chain of LedHex PCBs by lighting up all the segments
 in sequence.
-This is also a test of the LED power supply!
+
 
